@@ -41,27 +41,27 @@ router.post('/new-room', function(req, res) {
   res.redirect('/room/' + roomId);
 });
 
-router.post('/login', function(req, res) {
-  console.log('index.js');
-  console.log(req.body.email + ' prøver å logge inn');
-  firebase.auth()
-    .signInWithEmailAndPassword(req.body.email, req.body.password)
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      res.redirect('/');
-    });
+// router.post('/login', function(req, res) {
+//   console.log('index.js');
+//   console.log(req.body.email + ' prøver å logge inn');
+//   firebase.auth()
+//     .signInWithEmailAndPassword(req.body.email, req.body.password)
+//     .catch(function(error) {
+//       // Handle Errors here.
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       res.redirect('/');
+//     });
 
-  // console.log(req.params);
-  // console.log(req.query);
-  res.redirect('/rooms');
-  // var requestedRoom = !Object.keys(req.query).length;
-  // if (requestedRoom) {
-  //   res.redirect('/room/' + req.query);
-  // } else {
-  //   res.redirect('/rooms');
-  // }
-});
+//   // console.log(req.params);
+//   // console.log(req.query);
+//   res.redirect('/rooms');
+//   // var requestedRoom = !Object.keys(req.query).length;
+//   // if (requestedRoom) {
+//   //   res.redirect('/room/' + req.query);
+//   // } else {
+//   //   res.redirect('/rooms');
+//   // }
+// });
 
 module.exports = router;

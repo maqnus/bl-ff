@@ -3,8 +3,8 @@ var router = express.Router();
 const firebase = require('../config/admin');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
-    const user = await firebase.auth().currentUser;
+router.get('/', (req, res, next) => {
+    const user = firebase.auth().currentUser;
     console.log(user);
     res.render('rooms', { title: 'Jugeper - rooms', user });
 });

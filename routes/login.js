@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const firebase = require('../config/admin');
+const firebase = require('../config/firebase');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -8,21 +8,35 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-router.post('/login', function(req, res) {
+router.post('/', function(req, res) {
   console.log('post login.js');
   console.log(req.body.email + ' prøver å logge inn');
-  firebase.auth()
-    .signInWithEmailAndPassword(req.body.email, req.body.password)
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      res.redirect('/');
-    });
+  const {
+    email,
+    password
+  } = req.body;
+
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
+
+  res.redirect('/mypage');
+
   
-  console.log(req.params);
-  console.log(req.query);
-  res.redirect('/');
+  // firebase.auth()
+  //   .signInWithEmailAndPassword(req.body.email, req.body.password)
+  //   .catch(function(error) {
+  //     // Handle Errors here.
+  //     var errorCode = error.code;
+  //     var errorMessage = error.message;
+  //     console.log(errorMessage);
+  //     res.redirect('/');
+  //   });
+  
+  
   // if (req.query) {
   //   res.redirect('/room/' + req.query);
   // } else {
