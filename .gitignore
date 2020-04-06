@@ -17,3 +17,6 @@ node_modules
 # Temporary folders
 tmp/
 temp/
+
+# Package lock file
+package-lock.json
