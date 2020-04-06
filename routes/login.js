@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', function(req, res) {
-  console.log('prøver å logge inn');
+  console.log('post login.js');
+  console.log(req.body.email + ' prøver å logge inn');
   firebase.auth()
     .signInWithEmailAndPassword(req.body.email, req.body.password)
     .catch(function(error) {
@@ -18,12 +19,15 @@ router.post('/login', function(req, res) {
       var errorMessage = error.message;
       res.redirect('/');
     });
-
-  if (req.query) {
-    res.redirect('/room/' + req.query);
-  } else {
-    res.redirect('/');
-  }
+  
+  console.log(req.params);
+  console.log(req.query);
+  res.redirect('/');
+  // if (req.query) {
+  //   res.redirect('/room/' + req.query);
+  // } else {
+  //   res.redirect('/');
+  // }
 });
 
 module.exports = router;

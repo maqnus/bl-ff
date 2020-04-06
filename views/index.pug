@@ -20,10 +20,12 @@ block content
     p Det ser ut som du ikke er logget inn, gjøre det da vel!
 
     form(action="/login" method="post" autocomplete="on")
-      label Username
-        input(type="text" name="name")
-      label passord
-        input(type="password" name="passord")
+      label Epost
+        input(type="email" name="email")
+      label Passord
+        input(type="password" name="password")
       button(type="submit") Logg inn
+    
+    a(href="/reset-password") Glemt passord
 
     p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>

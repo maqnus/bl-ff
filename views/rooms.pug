@@ -5,11 +5,11 @@ block content
 
   if user
     p Velkommen til #{user.name}
-    p Her kan vi gjøre noe socket.io greier
+    p Her skal jeg vise en liste over alle mulige rom!
   else
     p Da er det bare å logge seg inn
 
-    form(action="/login?room=" + roomId method="post" autocomplete="on")
+    form(action="/login" method="post" autocomplete="on")
       label Epost
         input(type="email" name="email")
       label passord
