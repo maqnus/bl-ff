@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p Velkommen til #{title}
+
+  form(action="/new-room" method="post" autocomplete="off")
+    label Room name
+      input(type="text" name="name")
+    button(type="submit") Opprett rommet!
+
+  if user
+    p Du er logget inn, og får se en liste over rommene som er opprettet
+
+    ul
+      li
+        a(href="/romId") Romnavn
+
+  else
+    p Det ser ut som du ikke er logget inn, gjøre det da vel!
+
+    form(action="/login" method="post" autocomplete="on")
+      label Epost
+        input(type="email" name="email")
+      label Passord
+        input(type="password" name="password")
+      button(type="submit") Logg inn
+    
+    a(href="/reset-password") Glemt passord
+
+    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
