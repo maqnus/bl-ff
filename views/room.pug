@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+
+  if user
+    p Velkommen til #{user.name}
+    p Her kan vi gjøre noe socket.io greier
+  else
+    p Da er det bare å logge seg inn
+
+    form(action="/login?room=" + roomId method="post" autocomplete="on")
+      label Username
+        input(type="text" name="name")
+      label passord
+        input(type="password" name="passord")
+      button(type="submit") Logg inn
+
+    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
