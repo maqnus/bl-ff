@@ -5,23 +5,56 @@ const admin = require('../config/admin');
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
+  console.log('/ <get>');
+  
   const user = await firebase.auth().currentUser;
+  const rooms = [];
   if (user) {
-    const rooms = await firebase.database()
-    .ref('/room')
-    .once('value')
-    .then(function(snapshot) {
-        console.log(snapshot.val());
-        return snapshot.val();
-    });
-    res.render('index', { title: 'Jugeper', user, rooms });
+    console.log('user logged in');
   }
-  res.render('index', { title: 'Jugeper' });
+  res.render('index', { title: 'Jugeper', user, rooms });
 });
 
+router.post('/login', function(req, res) {
+  console.log('/login <post>');
+  const {
+    email,
+    password
+  } = req.body;
+  const rooms = [];
+
+  console.log(email + ' prøver å logge inn');
+
+  firebase.auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log('logged in successfully');
+      res.redirect('/');
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+      res.redirect('/');
+    });
+});
+
+router.post('/logout', function(req, res) {
+  firebase.auth()
+    .signOut()
+    .then(() => {
+      // Sign-out successful.
+      console.log('user signed out');
+      res.redirect('/');
+    }).catch(function(error) {
+      // An error happened.
+    });
+});
 
 router.post('/new-room', function(req, res) {
-  console.log('lag nytt rom');
+  console.log('/new-room <post>');
   function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -40,28 +73,5 @@ router.post('/new-room', function(req, res) {
     })
   res.redirect('/room/' + roomId);
 });
-
-// router.post('/login', function(req, res) {
-//   console.log('index.js');
-//   console.log(req.body.email + ' prøver å logge inn');
-//   firebase.auth()
-//     .signInWithEmailAndPassword(req.body.email, req.body.password)
-//     .catch(function(error) {
-//       // Handle Errors here.
-//       var errorCode = error.code;
-//       var errorMessage = error.message;
-//       res.redirect('/');
-//     });
-
-//   // console.log(req.params);
-//   // console.log(req.query);
-//   res.redirect('/rooms');
-//   // var requestedRoom = !Object.keys(req.query).length;
-//   // if (requestedRoom) {
-//   //   res.redirect('/room/' + req.query);
-//   // } else {
-//   //   res.redirect('/rooms');
-//   // }
-// });
 
 module.exports = router;

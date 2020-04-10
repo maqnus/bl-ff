@@ -6,14 +6,3 @@ block content
   if user
     p Velkommen til #{user.name}
     p Her skal jeg vise en liste over alle mulige rom!
-  else
-    p Da er det bare å logge seg inn.
-
-    form(action="/login" method="post" autocomplete="on")
-      label Epost
-        input(type="email" name="email")
-      label passord
-        input(type="password" name="password")
-      button(type="submit") Logg inn
-
-    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>

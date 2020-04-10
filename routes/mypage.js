@@ -3,10 +3,14 @@ var router = express.Router();
 const firebase = require('../config/firebase');
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
-    const user = firebase.auth().currentUser;
-    console.log(user);
-    res.render('mypage', { title: 'Jugeper - rooms', user });
+router.get('/', async (req, res, next) => {
+    console.log('/mypage <get>');
+    const user = await firebase.auth().currentUser;
+    if (user) {
+        res.render('mypage', { title: 'Jugeper - rooms', user });
+    } else {
+        res.redirect('/');
+    }
 });
 
 module.exports = router;

@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
-const firebase = require('../config/admin');
+const firebase = require('../config/firebase');
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
-    const user = firebase.auth().currentUser;
-    console.log(user);
-    res.render('rooms', { title: 'Jugeper - rooms', user });
+router.get('/', async (req, res) => {
+    console.log('/rooms <get>');
+
+    const user = await firebase.auth().currentUser;
+
+    if (user) {
+        res.render('rooms', { title: 'Jugeper - rooms', user });
+    } else {
+        res.redirect('/')
+    }
 });
 router.get('/:roomId', async (req, res, next) => {
     const roomId = req.params.roomId;

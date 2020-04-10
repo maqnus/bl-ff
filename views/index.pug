@@ -4,20 +4,20 @@ block content
   h1= title
   p Velkommen til #{title}
 
-  form(action="/new-room" method="post" autocomplete="off")
-    label Room name
-      input(type="text" name="name")
-    button(type="submit") Opprett rommet!
-
   if user
-    p Du er logget inn, og får se en liste over rommene som er opprettet
 
-    ul
-      li
-        a(href="/romId") Romnavn
+    form(action="/new-room" method="post" autocomplete="off")
+      label Room name
+        input(type="text" name="name")
+      button(type="submit") Lag rom!
 
-  else
-    p Det ser ut som du ikke er logget inn, gjøre det da vel!
+    a(href="/rooms") Browse i rom
+
+    if user.email
+      p Du er logget inn #{user.email}, og får se en liste over rommene som er opprettet
+
+  if !user
+    p Det ser ut som du ikke er logget inn, logg deg inn da vel!
 
     form(action="/login" method="post" autocomplete="on")
       label Epost
@@ -25,7 +25,10 @@ block content
       label Passord
         input(type="password" name="password")
       button(type="submit") Logg inn
-    
     a(href="/reset-password") Glemt passord
 
     p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
+  
+  if user
+    form(action="/logout" method="post")
+      button(type="submit") Logg ut

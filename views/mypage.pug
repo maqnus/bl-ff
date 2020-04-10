@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
 
-  if user
-    p Velkommen til #{user.name}
-    p Min side
+  if user.name
+    p Du heter #{user.name}
+  p Du er logget inn
+  p Min side
