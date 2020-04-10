@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const firebase = require('../config/admin');
+const firebase = require('../config/firebase');
+const admin = require('../config/admin');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.get('/:roomId', async (req, res, next) => {
     const roomId = req.params.roomId;
 
-    const room = await firebase.database()
+    const room = await admin.database()
         .ref('/room/' + roomId)
         .once('value')
         .then(function(snapshot) {

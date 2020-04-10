@@ -5,4 +5,8 @@ block content
 
   if user
     p Velkommen til #{user.name}
-    p Her skal jeg vise en liste over alle mulige rom!
+
+  if rooms
+    each val, index in rooms
+      li
+        a(href='/room/' + index)= val.name

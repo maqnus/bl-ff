@@ -29,7 +29,12 @@ router.post('/login', function(req, res) {
     .signInWithEmailAndPassword(email, password)
     .then(() => {
       console.log('logged in successfully');
-      res.redirect('/');
+      if (req.query.room) {
+        console.log('redirect to room: ' + req.query.room);
+        res.redirect('/room/' + req.query.room);
+      } else {
+        res.redirect('/');
+      }
     })
     .catch((error) => {
       // Handle Errors here.
