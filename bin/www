@@ -30,6 +30,13 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Create Socket.io instance
+*/
+
+var io = require('socket.io').listen(server, { log: false });
+io.on('connection', onConnection);
+
+/**
  * Normalize a port into a number, string, or false.
  */
 
@@ -47,6 +54,13 @@ function normalizePort(val) {
   }
 
   return false;
+}
+
+/**
+ * Event listener for Socket.io connection
+ */
+function onConnection(socket) {
+  console.log('a user connected');
 }
 
 /**

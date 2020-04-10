@@ -6,6 +6,9 @@ block content
   if user
     p Velkommen til #{user.name}
     p Her kan vi gjøre noe socket.io greier
+    script(src="/socket.io/socket.io.js")
+    script.
+      var socket = io();
   else
     p Da er det bare å logge seg inn
 
