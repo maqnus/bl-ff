@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:roomId', async (req, res, next) => {
+  console.log('/:roomId <get>');
   const roomId = req.params.roomId;
-  const io = req.app.locals.io;
 
   const room = await admin.database()
     .ref('/room/' + roomId)
@@ -21,22 +21,22 @@ router.get('/:roomId', async (req, res, next) => {
     });
   
   const user = await firebase.auth().currentUser;
-  
+
   if (roomId !== null && room && room.name) {
     res.render('room', { title: 'Jugeper - ' + room.name, roomId, user });
+    res.io.on('connection', function(socket){
+      console.log('a user connected');
+      socket.on('disconnect', function(){
+        console.log('user disconnected');
+      });
+      socket.on('chat message', function(msg){
+        console.log('message: ' + msg);
+        res.io.emit('chat message', msg);
+      });
+    });
   } else {
     res.redirect('/');
   }
-
-  io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', function(){
-      console.log('user disconnected');
-    });
-    socket.on('chat message', function(msg){
-      io.emit('chat message', msg);
-    });
-  })
 });
 
 module.exports = router;
