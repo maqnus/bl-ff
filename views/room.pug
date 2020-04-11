@@ -14,7 +14,7 @@ block content
     script(src="https://code.jquery.com/jquery-1.11.1.js")
     script.
       $(function () {
-        var socket = io();
+        var socket = io('/#{roomId}');
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
           socket.emit('chat message', $('#m').val());

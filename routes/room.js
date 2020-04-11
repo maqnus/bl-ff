@@ -24,18 +24,22 @@ router.get('/:roomId', async (req, res, next) => {
 
   if (roomId !== null && room && room.name) {
     res.render('room', { title: 'Jugeper - ' + room.name, roomId, user });
-    res.io.on('connection', function(socket){
-      console.log('a user connected');
+  } else {
+    res.redirect('/');
+  }
+
+  if (user && roomId !== null && room && room.name) {
+    const nsp = res.io.of('/' + roomId);
+    nsp.once('connection', function(socket){
+      console.log('someone connected');
       socket.on('disconnect', function(){
         console.log('user disconnected');
       });
       socket.on('chat message', function(msg){
         console.log('message: ' + msg);
-        res.io.emit('chat message', msg);
+        nsp.emit('chat message', msg);
       });
     });
-  } else {
-    res.redirect('/');
   }
 });
 
