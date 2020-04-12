@@ -4,27 +4,37 @@ block content
   h1= title
 
   if user
-    p socket.io chat
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    div(id="room-app")
+    //- p socket.io chat
+    //- <ul id="messages"></ul>
+    //- <form action="">
+    //-   <input id="m" autocomplete="off" /><button>Send</button>
+    //- </form>
 
-    script(src="/socket.io/socket.io.js")
-    script(src="https://code.jquery.com/jquery-1.11.1.js")
-    script.
-      $(function () {
-        var socket = io('/#{roomId}');
-        $('form').submit(function(e){
-          e.preventDefault(); // prevents page reloading
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-        });
-      });
+    script(type="application/json").
+      {
+        "user": {
+          "email": "#{user.email}"
+        },
+        "room": {
+          "endpoint": "/#{roomId}"
+        }
+      }
+    //- script(src="/socket.io/socket.io.js")
+    //- script(src="https://code.jquery.com/jquery-1.11.1.js")
+    //- script.
+    //-   $(function () {
+    //-     var socket = io('/#{roomId}');
+    //-     $('form').submit(function(e){
+    //-       e.preventDefault(); // prevents page reloading
+    //-       socket.emit('chat message', $('#m').val());
+    //-       $('#m').val('');
+    //-       return false;
+    //-     });
+    //-     socket.on('chat message', function(msg){
+    //-       $('#messages').append($('<li>').text(msg));
+    //-     });
+    //-   });
     script(src="/room.js")
   else
     p Da er det bare å logge seg inn
