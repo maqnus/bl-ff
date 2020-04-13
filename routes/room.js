@@ -35,7 +35,7 @@ router.get('/:roomId', async (req, res, next) => {
   }
 
   if (roomId !== null && room && room.name) {
-    res.render('room', { title: 'Jugeper - ' + room.name, roomId, user });
+    res.render('room', { title: 'Jugepave - ' + room.name, roomId, user });
   } else {
     res.redirect('/');
   }

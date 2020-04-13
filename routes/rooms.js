@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
         console.log(errorMessage);
       });
     console.log(rooms);
-    res.render('rooms', { title: 'Jugeper - rooms', user, rooms });
+    res.render('rooms', { title: 'Jugepave - rooms', user, rooms });
   } else {
     res.redirect('/')
   }

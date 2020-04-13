@@ -5,7 +5,7 @@ const firebase = require('../config/firebase');
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
     console.log('/reset-password <get>');
-    res.render('reset-password', { title: 'Jugeper' });
+    res.render('reset-password', { title: 'Jugepave' });
 });
 
 router.post('/', async (req, res) => {
