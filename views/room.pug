@@ -1,10 +1,34 @@
 extends layout
 
 block content
-  h1= title
+  div(class="container")
+    h1= title
+
+    if user
+      div(id="room-app")
+
+    if !user
+      div(class="col-lg-6 offset-lg-3 jp-login")
+        h2(class="text-center jp-login__title") Logg inn
+        form(action="/login?room=" + roomId method="post" autocomplete="on")
+          label(class="w-100")
+            span(class="sr-only") Epost
+            input(class="w-100 jp-login__input" type="email" name="email" placeholder="Epost")
+          label(class="w-100")
+            span(class="sr-only") Passord
+            input(class="w-100 jp-login__input" type="password" name="password" placeholder="Passord")
+
+          div(class="d-flex mb-4")
+            label(class="flex-fill")
+              input(type="checkbox")
+              span Husk meg
+            a(href="/reset-password") Glemt passord?
+
+          button(type="submit" class="btn btn-primary jp-login__btn mb-3") Logg inn
+
+        p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
 
   if user
-    div(id="room-app")
     script(type="application/json").
       {
         "user": {
@@ -16,14 +40,3 @@ block content
         }
       }
     script(src="/room.js")
-  else
-    p Da er det bare å logge seg inn
-
-    form(action="/login?room=" + roomId method="post" autocomplete="on")
-      label Epost
-        input(type="email" name="email")
-      label passord
-        input(type="password" name="password")
-      button(type="submit") Logg inn
-
-    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>

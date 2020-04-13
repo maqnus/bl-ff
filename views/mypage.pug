@@ -1,9 +1,10 @@
 extends layout
 
 block content
-  h1= title
+  div(class="container")
+    h1= title
 
-  if user.name
-    p Du heter #{user.name}
-  p Du er logget inn
-  p Min side
+    if user.name
+      p Du heter #{user.name}
+    p Du er logget inn
+    p Min side
