@@ -1,8 +1,8 @@
 import "regenerator-runtime/runtime.js";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import socketIOClient from "socket.io-client";
 
-console.log('room script');
 const jsonNode = document.querySelector("script[type='application/json']");
 const jsonText = jsonNode.textContent;
 const jsonData = JSON.parse(jsonText);
@@ -11,23 +11,55 @@ class RoomApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: false
+      socket: socketIOClient(jsonData.room.endpoint),
+      response: false,
+      array: [],
+      message: ''
     }
   }
 
-  componentDidMount() {
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.on("FromAPI", data => this.setState({ response: data }));
+  componentDidMount = () => {
+    this.state.socket.on("chat message", msg => {
+      console.log('socket mottok meldingen: ' + msg);
+      let array = [...this.state.array];
+      array.push({ text: msg });
+      this.setState({ array });
+    });
+  }
+
+  handleMessageChange = (message) => {
+    console.log(message);
+    this.setState({ message });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.message);
+    this.state.socket.emit('chat message', this.state.message);
+    this.setState({ message: '' });
+  }
+
+  renderMessages = () => {
+    return this.state.array
+      .map((item, key) => (
+        <li>
+          {item.text}
+        </li>
+      ));
   }
 
   render() {
-    console.log(jsonData);
     return (
-      <div>
-        <input type="text" />
-        <button>Send</button>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        {this.renderMessages()}
+        <p></p>
+        <input
+          type="text"
+          value={this.state.message}
+          onChange={event => this.handleMessageChange(event.currentTarget.value)}
+        />
+        <button type="submit">Send</button>
+      </form>
     )
   }
 }
