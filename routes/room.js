@@ -19,8 +19,20 @@ router.get('/:roomId', async (req, res, next) => {
       console.log(snapshot.val());
       return snapshot.val();
     });
-  
+
   const user = await firebase.auth().currentUser;
+  var name, email, photoUrl, uid, emailVerified;
+
+  if (user != null) {
+    name = user.displayName;
+    email = user.email;
+    photoUrl = user.photoURL;
+    emailVerified = user.emailVerified;
+    uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                    // this value to authenticate with your backend server, if
+                    // you have one. Use User.getToken() instead.
+    console.log('user.uid', user.uid);
+  }
 
   if (roomId !== null && room && room.name) {
     res.render('room', { title: 'Jugeper - ' + room.name, roomId, user });
