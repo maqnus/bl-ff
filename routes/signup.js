@@ -11,6 +11,7 @@ router.post('/', function(req, res) {
   console.log('signup');
   firebase.auth()
     .createUserWithEmailAndPassword(req.body.email, req.body.password)
+   
     .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -18,6 +19,10 @@ router.post('/', function(req, res) {
     console.log(errorMessage);
     // ...
   });
+
+
+
+
   if (req.body.roomId) {
     res.redirect('/room/' + req.body.roomId);
   }

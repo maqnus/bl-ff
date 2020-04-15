@@ -9,9 +9,6 @@ router.get('/', async (req, res, next) => {
   
   const user = await firebase.auth().currentUser;
   const rooms = [];
-  if (user) {
-    console.log('user logged in');
-  }
   res.render('index', { title: 'Jugeper', user, rooms });
 });
 
