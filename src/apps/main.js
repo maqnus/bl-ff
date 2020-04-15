@@ -1,4 +1,4 @@
-const toggler = document.getElementById('navbarDropdownMenuLink');
+const toggler = document.getElementById('navbarDropdownMenuButton');
 const box = document.getElementById("heiii");
     toggler.addEventListener('click', () => {
         box.dataset.toggle = toggler.dataset.toggle === "collapse" ? "expand" : "collapse";
