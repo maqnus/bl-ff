@@ -1,39 +1,42 @@
 extends layout
 
 block content
-  h1= title
+  div(class="container" style="display: flex; flex-direction: column; justify-content: center; min-height: 100vh;")
+    //- h1= title
+
+    if user
+      div(id="room-app")
+
+    if !user
+      div(class="col-lg-6 offset-lg-3 jp-login")
+        h2(class="text-center jp-login__title") Logg inn
+        form(action="/login?room=" + roomId method="post" autocomplete="on")
+          label(class="w-100")
+            span(class="sr-only") Epost
+            input(class="w-100 jp-login__input" type="email" name="email" placeholder="Epost")
+          label(class="w-100")
+            span(class="sr-only") Passord
+            input(class="w-100 jp-login__input" type="password" name="password" placeholder="Passord")
+
+          div(class="d-flex mb-4")
+            label(class="flex-fill")
+              input(type="checkbox")
+              span Husk meg
+            a(href="/reset-password") Glemt passord?
+
+          button(type="submit" class="btn btn-primary jp-login__btn mb-3") Logg inn
+
+        p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
 
   if user
-    p socket.io chat
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-
-    script(src="/socket.io/socket.io.js")
-    script(src="https://code.jquery.com/jquery-1.11.1.js")
-    script.
-      $(function () {
-        var socket = io('/#{roomId}');
-        $('form').submit(function(e){
-          e.preventDefault(); // prevents page reloading
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-        });
-      });
+    script(type="application/json").
+      {
+        "user": {
+          "uid": "#{user.uid}",
+          "email": "#{user.email}"
+        },
+        "room": {
+          "endpoint": "/#{roomId}"
+        }
+      }
     script(src="/room.js")
-  else
-    p Da er det bare å logge seg inn
-
-    form(action="/login?room=" + roomId method="post" autocomplete="on")
-      label Epost
-        input(type="email" name="email")
-      label passord
-        input(type="password" name="password")
-      button(type="submit") Logg inn
-
-    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>

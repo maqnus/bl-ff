@@ -6,10 +6,17 @@ const admin = require('../config/admin');
 /* GET home page. */
 router.get('/', async (req, res, next) => {
   console.log('/ <get>');
-  
+
   const user = await firebase.auth().currentUser;
   const rooms = [];
+<<<<<<< HEAD
   res.render('index', { title: 'Jugeper', user, rooms });
+=======
+  if (user) {
+    console.log('user logged in');
+  }
+  res.render('index', { title: 'Jugepave', user, rooms });
+>>>>>>> d1c8a6ef34556f49931c4ccfc08587c0ee9563e1
 });
 
 router.post('/login', function(req, res) {

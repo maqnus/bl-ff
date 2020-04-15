@@ -4,7 +4,7 @@ const firebase = require('../config/firebase');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('signup', { title: 'Jugeper - Lag bruker' });
+    res.render('signup', { title: 'Jugepave - Lag bruker' });
 });
 
 router.post('/', function(req, res) {

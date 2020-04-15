@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var roomRouter = require('./routes/room');
 var roomsRouter = require('./routes/rooms');
 var signupRouter = require('./routes/signup');
+var resetPasswordRouter = require('./routes/reset-password');
 var mypageRouter = require('./routes/mypage');
 
 // Express
@@ -36,6 +37,7 @@ app.use('/signup', signupRouter);
 app.use('/room', roomRouter);
 app.use('/rooms', roomsRouter);
 app.use('/mypage', mypageRouter);
+app.use('/reset-password', resetPasswordRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

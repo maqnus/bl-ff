@@ -1,34 +1,43 @@
 extends layout
 
 block content
-  h1= title
-  p Velkommen til #{title}
+  div(class="container" style="display: flex; flex-direction: column; justify-content: center; min-height: 100vh;")
+    //- h1= title
+    //- p Velkommen til #{title}
 
-  if user
+    if user
 
-    form(action="/new-room" method="post" autocomplete="off")
-      label Room name
-        input(type="text" name="name")
-      button(type="submit") Lag rom!
+      form(action="/new-room" method="post" autocomplete="off")
+        label Room name
+          input(type="text" name="name")
+        button(type="submit") Lag rom!
 
-    a(href="/rooms") Browse i rom
+      a(href="/rooms") Browse i rom
 
-    if user.email
-      p Du er logget inn #{user.email}, og får se en liste over rommene som er opprettet
+      if user.email
+        p Du er logget inn #{user.email}, og får se en liste over rommene som er opprettet
 
-  if !user
-    p Det ser ut som du ikke er logget inn, logg deg inn da vel!
+    if !user
+      div(class="col-lg-6 offset-lg-3 jp-login")
+        h2(class="text-center jp-login__title") Logg inn
+        form(action="/login" method="post" autocomplete="on")
+          label(class="w-100")
+            span(class="sr-only") Epost
+            input(class="w-100 jp-login__input" type="email" name="email" placeholder="Epost")
+          label(class="w-100")
+            span(class="sr-only") Passord
+            input(class="w-100 jp-login__input" type="password" name="password" placeholder="Passord")
 
-    form(action="/login" method="post" autocomplete="on")
-      label Epost
-        input(type="email" name="email")
-      label Passord
-        input(type="password" name="password")
-      button(type="submit") Logg inn
-    a(href="/reset-password") Glemt passord
+          div(class="d-flex")
+            label(class="flex-fill")
+              input(type="checkbox")
+              span Husk meg
+            a(href="/reset-password") Glemt passord?
 
-    p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
-  
-  if user
-    form(action="/logout" method="post")
-      button(type="submit") Logg ut
+          button(type="submit" class="w-100 btn btn-primary") Logg inn
+
+        p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
+
+    if user
+      form(action="/logout" method="post")
+        button(type="submit") Logg ut

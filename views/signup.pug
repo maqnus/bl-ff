@@ -1,20 +1,21 @@
 extends layout
 
 block content
-  h1= title
+  div(class="container")
+    h1= title
 
-  p Da er det bare å lage en bruker
+    p Da er det bare å lage en bruker
 
-  form(action="/signup" method="post" autocomplete="on")
-    label Username
-      input(type="text" name="name")
-    label Passord
-      input(type="password" name="password")
-    label Email
-      input(type="email" name="email")
-    label(hidden) go to room after registration
-      input(type="text" id="desiredRoomInput" name="roomId")
-    button(type="submit") Sånn, lag bruker!
+    form(action="/signup" method="post" autocomplete="on")
+      label Username
+        input(type="text" name="name")
+      label Passord
+        input(type="password" name="password")
+      label Email
+        input(type="email" name="email")
+      label(hidden) go to room after registration
+        input(type="text" id="desiredRoomInput" name="roomId")
+      button(type="submit") Sånn, lag bruker!
   script.
     const urlParams = new URLSearchParams(window.location.search);
     const desiredRoomId = urlParams.get('room');
