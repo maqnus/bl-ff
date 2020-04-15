@@ -5,5 +5,49 @@ html
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel='stylesheet', href='/stylesheets/styles.css')
+    
   body
+ 
+    
+ 
+
+
+    
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand(href='#') Jugepave
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+          hei
+      
+      .collapse.navbar-collapse(id='navbarSupportedContent')
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='#') Hjem
+
+          if rooms
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle(id='navbarDropdownMenuLink', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Rom
+              .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                each val, index in rooms
+                  a.dropdown-item(href='/room/' + index)= val.name
+                a.dropdown-item(href='#') test2
+                a.dropdown-item(href='#') test3
+          li.nav-item
+            a.nav-link(href='/parking') Parking
+          li.nav-item
+            a.nav-link(href='/places') Places
+        ul.navbar-nav.float-right
+          li.nav-item
+            a.nav-link(href='/signup') Sign up
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle(id='navbarDropdownMenuLink', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Accounts
+            .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+              a.dropdown-item(href='#') Settings
+
+
+
+
+
     block content
+    script(src="/main.js")
+     

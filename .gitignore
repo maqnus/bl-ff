@@ -20,3 +20,8 @@ temp/
 
 # Package lock file
 package-lock.json
+
+#div
+*.map 
+*.css
+public/*.js  

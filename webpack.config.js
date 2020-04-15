@@ -3,6 +3,7 @@ const config = {
   entry: {
     room: './src/apps/rooms/index.js',
     style: './src/styles/styles.scss',
+    main: './src/apps/main.js'
   },
   output: {
     filename: '[name].js',
