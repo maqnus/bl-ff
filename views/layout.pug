@@ -7,42 +7,7 @@ html
     link(rel='stylesheet', href='/stylesheets/styles.css')
     
   body
-
-    nav(class="navbar navbar-expand-lg navbar-light bg-light")
-      a(class="navbar-brand" href='/' title="Er du jugepaven?!") Juge<strong>pave</strong>
-      button(class="navbar-toggler" type='button' data-toggle='collapse'
-             data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
-             aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      
-      div(id="navbarSupportedContent" class="collapse navbar-collapse" )
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='#') Hjem
-
-          if rooms
-            li.nav-item.dropdown
-              a(id='navbarDropdownMenuLink' class="nav-link dropdown-toggle" 
-                data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Rom
-              .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                each val, index in rooms
-                  a(href='/room/' + index class="dropdown-item")= val.name
-                a(href='#' class="dropdown-item") test2
-                a(href='#' class="dropdown-item") test3
-          li.nav-item
-            a.nav-link(href='/parking') Parking
-          li.nav-item
-            a.nav-link(href='/places') Places
-      
-        ul.navbar-nav.float-right.w-100
-          li.nav-item
-            a(href='/signup' class="nav-link text-right w-100") Sign up
-          li.nav-item.dropdown
-            a(class="nav-link dropdown-toggle text-right w-100" data-toggle="dropdown" href="#"
-              role="button" aria-haspopup="true" aria-expanded="false") Accounts
-            div(aria-labelledby='navbarDropdownMenuLink' class="dropdown-menu")
-              a(href='#' class="dropdown-item") Settings
-
+    include shared/navbar.pug
     block content
     script(src="/main.js")
      

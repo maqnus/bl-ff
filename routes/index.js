@@ -7,8 +7,8 @@ const admin = require('../config/admin');
 router.get('/', async (req, res, next) => {
   console.log('/ <get>');
 
-  const user = await firebase.auth().currentUser;
   const rooms = [];
+  const user = await firebase.auth().currentUser;
   res.render('index', { title: 'Jugeper', user, rooms });
 });
 
