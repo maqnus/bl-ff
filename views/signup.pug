@@ -2,21 +2,50 @@ extends layout
 
 block content
   div(class="container")
-    h1= title
+    //- h1= title
 
-    p Da er det bare å lage en bruker
+    //- p Da er det bare å lage en bruker
 
-    form(action="/signup" method="post" autocomplete="on")
-      label Username
-        input(type="text" name="name")
-      label Passord
-        input(type="password" name="password")
-      label Email
-        input(type="email" name="email")
-      label(hidden) go to room after registration
-        input(type="text" id="desiredRoomInput" name="roomId")
-      button(type="submit") Sånn, lag bruker!
+ 
+
+    div(class="col-lg-6 offset-lg-3 jp-login")
+      h2(class="text-center jp-login__title") Registrer deg
+      form(action="/signup" method="post" autocomplete="on")
+        label(class="w-100")
+          span(class="sr-only") Navn
+          input(class="w-100 jp-login__input" type="text" name="name" placeholder="Navn")
+        label(class="w-100")
+          span(class="sr-only") Epost
+          input(class="w-100 jp-login__input" type="email" name="email" placeholder="Epost")
+        label(class="w-100")
+          span(class="sr-only") Passord
+          input(class="w-100 jp-login__input" type="password" name="password" placeholder="Passord")
+        button(type="submit" class="w-100 btn btn-primary") Sånn, lag bruker!
+
+      p Hvis du har en bruker allerede kan du <a href="/">logge inn her!</a>
+
+      
+        
+   
   script.
     const urlParams = new URLSearchParams(window.location.search);
     const desiredRoomId = urlParams.get('room');
     document.getElementById('desiredRoomInput').value = desiredRoomId;
+
+
+
+
+
+  //-  form(action="/signup" method="post" autocomplete="on")
+  //-     label Navn: 
+  //-       input(type="text" name="name")
+  //-     br
+  //-     label Passord:
+  //-       input(type="password" name="password")      
+  //-     br 
+  //-     label Epost: 
+  //-       input(type="email" name="email")
+  //-     label(hidden) go to room after registration
+  //-       input(type="text" id="desiredRoomInput" name="roomId")
+  //-     button(type="submit") Sånn, lag bruker!
+

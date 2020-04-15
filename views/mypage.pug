@@ -4,15 +4,15 @@ block content
   div(class="container")
     h1= title
 
-  if user.name
-    p Du heter #{user.displayName}
-    p Du har epost: #{user.email}
-    
-  p Du er logget inn
-  p Min side
+    if user.name
+      p Du heter #{user.displayName}
+      p Du har epost: #{user.email}
+      
+      p Du er logget inn
+      p Min side
 
-  p Endre displayname
-  form(action="mypage" method="post" autocomplete="on")
-    label Brukernavn:
-      input(type="text" name="name")
-    button(type="submit") Sånn, endre navn!
+      p Endre displayname
+    form(action="mypage" method="post" autocomplete="on")
+      label Brukernavn:
+        input(type="text" name="name")
+      button(type="submit") Sånn, endre navn!

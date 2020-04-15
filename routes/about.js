@@ -4,15 +4,13 @@ const firebase = require('../config/firebase');
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
-    console.log('/mypage <get>');
+    console.log('/about <get>');
     
     const rooms = [];
     const user = await firebase.auth().currentUser;
-    if (user) {
-        res.render('mypage', { title: 'Jugepave - min profil', user , rooms});
-    } else {
-        res.redirect('/');
-    }
+  
+    res.render('about', { title: 'Om Jugepave', user, rooms});
+ 
 });
 
 module.exports = router;
