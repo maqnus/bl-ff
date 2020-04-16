@@ -76,4 +76,50 @@ router.post('/new-room', function(req, res) {
   res.redirect('/room/' + roomId);
 });
 
+
+router.post('/updateprofile', function (req, res) {
+  console.log('/mypage <post>');
+  const {
+      email,
+      password,
+      name
+  } = req.body;
+  console.log("Nytt navn: " , name)
+  const user = firebase.auth().currentUser;
+  if (user) {
+      
+      user.updateProfile({ 
+              displayName: name,
+          }).then(function () {
+          console.log("user profile updated")
+          res.redirect('/mypage');
+      }).catch(function (error) {
+          console.log(error)
+          res.redirect('/');
+      });
+  } else {
+      res.redirect('/');
+  }
+});
+
+
+
+router.post('/addquestion', function (req,res){
+  console.log("/addquestion <post>");
+  const {
+    question,
+    answer
+  } = req.body;
+ 
+    admin.database().ref('questions/').push({
+      q: question,
+      a: answer,
+      author:"..."
+    }).then((data)=>{
+      res.redirect('/about')
+      console.log("question added")
+    });
+  
+})
+
 module.exports = router;

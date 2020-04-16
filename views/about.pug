@@ -4,5 +4,41 @@ block content
   div(class="container")
     h1= title
 
-    p Jugepave er et spill og en app og litt sånn
+    p Jugepave er et spill og en app og litt sånn. 
+    p Her ligger det midlertidig en funksjon for å legge til spørsmål i databasen. Mer funksjonalitet kommer senere...
     
+
+
+    h2 Legg til Spørsmål:
+    p Her kan du legge inn spørsmål som skal bli med i spillet.
+
+    form(action="/addquestion" method="post")
+      label Spørsmål
+        input(type="text" name="question")
+      br
+      label Svar
+        input(type="text" name="answer")
+        
+      button(type="submit") Legg til spørsmål
+
+
+      br 
+      br 
+    h2 Spørsmål
+    if dbqa !=null  
+      each question in dbqa
+        span q: 
+        <strong>
+        span= question.q
+        br
+        </strong>
+        span a: 
+        <strong>
+        span= question.a
+        </strong>
+        br
+        br
+    else
+      p Ingen spørsmål ennå
+      
+

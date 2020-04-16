@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const firebase = require('../config/firebase');
 
+
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
     console.log('/mypage <get>');
@@ -14,5 +15,8 @@ router.get('/', async (req, res, next) => {
         res.redirect('/');
     }
 });
+
+
+
 
 module.exports = router;
