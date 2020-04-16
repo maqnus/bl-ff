@@ -17,10 +17,8 @@ nav(class="navbar navbar-expand-lg navbar-light bg-light")
           .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
             each val, index in rooms
               a(href='/room/' + index class="dropdown-item")= val.name
-            a(href='#' class="dropdown-item") test2
-            a(href='#' class="dropdown-item") test3
       li.nav-item
-        a.nav-link(href='/about') Spørsmål
+        a.nav-link(href='/about') Om Jugepave
 
     ul.navbar-nav.float-right.w-100
       if !user 

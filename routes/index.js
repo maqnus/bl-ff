@@ -7,8 +7,18 @@ const admin = require('../config/admin');
 router.get('/', async (req, res, next) => {
   console.log('/ <get>');
 
-  const rooms = [];
-  const user = await firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
+  const rooms = await admin.database()
+      .ref('/room/')
+      .once('value')
+      .then(snapshot => snapshot.val())
+      .catch(error => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
   res.render('index', { title: 'Jugeper', user, rooms });
 });
 

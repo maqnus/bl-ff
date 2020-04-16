@@ -6,22 +6,24 @@ const admin = require('../config/admin');
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
-    console.log('/about <get>');
-    const rooms = [];
-    const user = await firebase.auth().currentUser;
-    
-    const dbquest = await admin.database()
-    .ref('/questions/')
-    .on('value', (data)=>{
-        console.log(data.val())
-        var dbqa = data.val();
+  console.log('/about <get>');
+  const user = firebase.auth().currentUser;
 
-       res.render('about', { title: 'Om Jugepave', user, rooms, dbqa});
-    })
+  const rooms = await admin.database()
+    .ref('/room/')
+    .once('value')
+    .then(snapshot => snapshot.val())
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
   
-    // res.render('about', { title: 'Om Jugepave', user, rooms});
-  
-    
+  const dbquest = admin.database()
+    .ref('/questions/')
+    .on('value', data => data.val());
+  res.render('about', { title: 'Om Jugepave', user, rooms, dbquest});
  
 });
 

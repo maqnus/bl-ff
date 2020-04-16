@@ -3,19 +3,45 @@ extends layout
 block content
   div(class="container")
     //- h1= title
-    //- p Velkommen til #{title}
+    //- p Er du en jugepave, eller er du paven? Spill spillet!
 
     if user
+      div(class="row")
+        div(class="col-6")
+          h2 Siste besøkte rom
+          ul
+            li
+              a(href="#") Rom 1
+            li
+              a(href="#") Rom 2
+          h2 Mine rom
+          ul
+            li
+              a(href="#") Rom 1
+            li
+              a(href="#") Rom 2
+          //- a(href="/rooms") Se alle rom
+          h2 Lag nytt rom
+          form(action="/new-room" method="post" autocomplete="off")
+            label Room name
+              input(type="text" name="name")
+            button(type="submit") Lag rom!
+          
+        div(class="col-6")
+          h2 Mine kort
+          ul
+            li
+              p Spørsmål 1
+            li
+              p Spørsmål 2
 
-      form(action="/new-room" method="post" autocomplete="off")
-        label Room name
-          input(type="text" name="name")
-        button(type="submit") Lag rom!
-
-      a(href="/rooms") Browse i rom
-
-      if user.email
-        p Du er logget inn #{user.email}, og får se en liste over rommene som er opprettet
+          h2 Nytt kort
+          form(action="/addquestion" method="post")
+            label Spørsmål
+              input(type="text" name="question")
+            label Svar
+              input(type="text" name="answer")
+            button(type="submit") Legg til nytt kort
 
     if !user
       div(class="col-lg-6 offset-lg-3 jp-login")
@@ -37,7 +63,3 @@ block content
           button(type="submit" class="w-100 btn btn-primary") Logg inn
 
         p Hvis du ikke har en bruker allerede kan du <a href="/signup">opprette en bruker!</a>
-
-    if user
-      form(action="/logout" method="post")
-        button(type="submit") Logg ut

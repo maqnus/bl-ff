@@ -11,3 +11,8 @@ block content
       each val, index in rooms
         li
           a(href='/room/' + index)= val.name
+      
+      form(action="/new-room" method="post" autocomplete="off")
+        label Room name
+          input(type="text" name="name")
+        button(type="submit") Lag rom!

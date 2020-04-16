@@ -5,14 +5,12 @@ block content
     h1= title
 
     if user
-      br
       h5 Personlig info:
       if user.displayName 
         p Navn <strong> #{user.displayName} </strong>
       else
         p Du har ikke lagt inn navnet ditt ennå. Gjør det nederst
       p Epost: <strong> #{user.email} </strong>
-      br
       p Endre info:
       form(action="/updateprofile" method="post")
         label Navn:

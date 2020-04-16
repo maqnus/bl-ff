@@ -12,6 +12,18 @@ router.get('/:roomId', async (req, res, next) => {
   console.log('/:roomId <get>');
   const roomId = req.params.roomId;
 
+  const rooms = await admin.database()
+    .ref('/room/')
+    .once('value')
+    .then(snapshot => snapshot.val())
+    .catch(error => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
+
   const room = await admin.database()
     .ref('/room/' + roomId)
     .once('value')
@@ -35,7 +47,7 @@ router.get('/:roomId', async (req, res, next) => {
   }
 
   if (roomId !== null && room && room.name) {
-    res.render('room', { title: 'Jugepave - ' + room.name, roomId, user });
+    res.render('room', { title: 'Jugepave - ' + room.name, roomId, user, rooms });
   } else {
     res.redirect('/');
   }
