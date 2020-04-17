@@ -7,7 +7,7 @@ block content
 
     if user
       div(class="row")
-        div(class="col-6")
+        div(class="col-12 col-lg-6")
           h2 Siste besøkte rom
           ul
             li
@@ -27,7 +27,7 @@ block content
               input(type="text" name="name")
             button(type="submit") Lag rom!
           
-        div(class="col-6")
+        div(class="col-12 col-lg-6")
           h2 Mine kort
           ul
             li
@@ -44,7 +44,7 @@ block content
             button(type="submit") Legg til nytt kort
 
     if !user
-      div(class="col-lg-6 offset-lg-3 jp-login")
+      div(class="col-12 col-lg-6 offset-lg-3 jp-login")
         h2(class="text-center jp-login__title") Logg inn
         form(action="/login" method="post" autocomplete="on")
           label(class="w-100")
