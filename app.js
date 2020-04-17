@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(function(req, res, next){
-  // res.io = io;
+  res.io = io;
   next();
 });
 app.use(logger('dev'));
